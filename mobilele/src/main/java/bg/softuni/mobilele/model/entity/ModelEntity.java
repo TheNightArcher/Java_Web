@@ -8,11 +8,14 @@ import java.time.LocalDateTime;
 @Entity(name = "models")
 public class ModelEntity extends BaseEntity {
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
+    @Column(nullable = false)
     private String imageUrl;
 
     @Column(name = "start_year")
@@ -90,5 +93,19 @@ public class ModelEntity extends BaseEntity {
 
     public void setBrand(BrandEntity brand) {
         this.brand = brand;
+    }
+
+    @Override
+    public String toString() {
+        return "ModelEntity{" +
+                "name='" + name + '\'' +
+                ", category=" + category +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", startYear=" + startYear +
+                ", endYear=" + endYear +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", brand=" + brand +
+                '}';
     }
 }

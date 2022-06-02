@@ -1,11 +1,13 @@
 package bg.softuni.mobilele.model.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
 @Entity(name = "brands")
 public class BrandEntity extends BaseEntity{
 
+    @Column(nullable = false)
    private String name;
 
    private LocalDateTime created;
@@ -34,5 +36,14 @@ public class BrandEntity extends BaseEntity{
 
     public void setModified(LocalDateTime modified) {
         this.modified = modified;
+    }
+
+    @Override
+    public String toString() {
+        return "BrandEntity{" +
+                "name='" + name + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
+                '}';
     }
 }
