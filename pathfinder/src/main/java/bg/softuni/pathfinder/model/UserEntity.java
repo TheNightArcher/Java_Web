@@ -13,7 +13,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "fullname",nullable = false)
+    @Column(nullable = false)
     private String fullName;
 
     private int age;
@@ -24,7 +24,6 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
     private String email;
 
     @ManyToMany()

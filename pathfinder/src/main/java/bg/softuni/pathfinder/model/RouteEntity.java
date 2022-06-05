@@ -14,10 +14,13 @@ public class RouteEntity {
     private long id;
 
     @Lob
-    private String gpx;
+    private String description;
+
+    @Lob
+    private String gpxCoordinates;
 
     @Enumerated(value = EnumType.STRING)
-    private LevelEnum levelEnum;
+    private LevelEnum level;
 
     @Column(nullable = false,unique = true)
     private String name;
@@ -38,20 +41,20 @@ public class RouteEntity {
         this.id = id;
     }
 
-    public String getGpx() {
-        return gpx;
+    public String getGpxCoordinates() {
+        return gpxCoordinates;
     }
 
-    public void setGpx(String gpx) {
-        this.gpx = gpx;
+    public void setGpxCoordinates(String gpx) {
+        this.gpxCoordinates = gpx;
     }
 
-    public LevelEnum getLevelEnum() {
-        return levelEnum;
+    public LevelEnum getLevel() {
+        return level;
     }
 
-    public void setLevelEnum(LevelEnum levelEnum) {
-        this.levelEnum = levelEnum;
+    public void setLevel(LevelEnum levelEnum) {
+        this.level = levelEnum;
     }
 
     public String getName() {
@@ -84,5 +87,13 @@ public class RouteEntity {
 
     public void setCategories(List<CategoryEntity> categories) {
         this.categories = categories;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
