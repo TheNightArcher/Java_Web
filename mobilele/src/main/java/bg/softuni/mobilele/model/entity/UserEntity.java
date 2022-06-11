@@ -10,13 +10,19 @@ import java.util.List;
 @Entity(name = "users")
 public class UserEntity extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(nullable = false,
+            unique = true)
     private String email;
 
     private String password;
 
-    private boolean isActive;
+    @Column(nullable = false)
+    private String firstName;
 
+    @Column(nullable = false)
+    private String lastName;
+
+    private boolean isActive;
     private String imageUrl;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -36,6 +42,22 @@ public class UserEntity extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public boolean isActive() {
@@ -62,15 +84,13 @@ public class UserEntity extends BaseEntity {
         this.userRoles = userRoles;
     }
 
-    public void addRole(UserRoleEntity userRole){
-        this.userRoles.add(userRole);
-    }
-
     @Override
     public String toString() {
         return "UserEntity{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", isActive=" + isActive +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", userRoles=" + userRoles +
