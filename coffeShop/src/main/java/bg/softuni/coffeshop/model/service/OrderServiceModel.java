@@ -1,30 +1,18 @@
-package bg.softuni.coffeshop.model;
+package bg.softuni.coffeshop.model.service;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import bg.softuni.coffeshop.model.CategoryNameEnum;
+import bg.softuni.coffeshop.model.UserEntity;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name = "orders")
-public class OrderEntity extends BaseEntity {
+public class OrderServiceModel {
 
-    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private LocalDateTime orderTime;
-
-    @Column(nullable = false)
     private BigDecimal price;
-
-    @ManyToOne
-    private CategoryEntity category;
-
-    @ManyToOne
+    private CategoryNameEnum category;
     private UserEntity employee;
 
     public String getDescription() {
@@ -59,12 +47,12 @@ public class OrderEntity extends BaseEntity {
         this.price = price;
     }
 
-    public CategoryEntity getCategory() {
+    public CategoryNameEnum getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEntity categoryEntity) {
-        this.category = categoryEntity;
+    public void setCategory(CategoryNameEnum category) {
+        this.category = category;
     }
 
     public UserEntity getEmployee() {

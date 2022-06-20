@@ -1,23 +1,24 @@
 package bg.softuni.coffeshop.model;
 
-import bg.softuni.coffeshop.model.dto.CategoryNameDTO;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity(name = "categories")
 public class CategoryEntity extends BaseEntity {
 
-    private CategoryNameDTO name;
+    @Enumerated(value = EnumType.STRING)
+    private CategoryNameEnum name;
 
     @Column(nullable = false)
     private int neededTime;
 
-    public CategoryNameDTO getName() {
+    public CategoryNameEnum getName() {
         return name;
     }
 
-    public void setName(CategoryNameDTO name) {
+    public void setName(CategoryNameEnum name) {
         this.name = name;
     }
 

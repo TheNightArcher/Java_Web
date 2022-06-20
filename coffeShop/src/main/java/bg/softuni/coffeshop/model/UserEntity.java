@@ -2,6 +2,10 @@ package bg.softuni.coffeshop.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "users")
 public class UserEntity extends BaseEntity {
@@ -9,16 +13,19 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String email;
 
-    private String first_name;
+    private String firstName;
 
     @Column(nullable = false)
-    private String last_name;
+    private String lastName;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false, unique = true)
     private String username;
+
+    @OneToMany(mappedBy = "employee",fetch = FetchType.EAGER)
+    private Set<OrderEntity> orders = new HashSet<>();
 
     public String getEmail() {
         return email;
@@ -28,20 +35,20 @@ public class UserEntity extends BaseEntity {
         this.email = email;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -58,5 +65,13 @@ public class UserEntity extends BaseEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Set<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderEntity> orders) {
+        this.orders = orders;
     }
 }
