@@ -17,16 +17,16 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/home">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${@currentUser.id == null}">
                     <a class="nav-link" href="/login">Login</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${@currentUser.id == null}">
                     <a class="nav-link" href="/register">Register</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:unless="${@currentUser.id == null}">
                     <a class="nav-link" href="/ship-add">Add Ship</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:unless="${@currentUser.id == null}">
                     <a class="nav-link" href="/logout">Logout</a>
                 </li>
             </ul>
