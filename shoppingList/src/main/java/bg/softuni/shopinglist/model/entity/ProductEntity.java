@@ -12,6 +12,7 @@ public class ProductEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
@@ -21,7 +22,7 @@ public class ProductEntity extends BaseEntity {
     private LocalDateTime neededBefore;
 
     @ManyToOne()
-    private CategoryEntity categoryEntity;
+    private CategoryEntity category;
 
     public String getName() {
         return name;
@@ -55,11 +56,11 @@ public class ProductEntity extends BaseEntity {
         this.neededBefore = neededBefore;
     }
 
-    public CategoryEntity getCategoryEntity() {
-        return categoryEntity;
+    public CategoryEntity getCategory() {
+        return category;
     }
 
-    public void setCategoryEntity(CategoryEntity categoryEntity) {
-        this.categoryEntity = categoryEntity;
+    public void setCategory(CategoryEntity categoryEntity) {
+        this.category = categoryEntity;
     }
 }

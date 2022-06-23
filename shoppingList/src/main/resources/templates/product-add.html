@@ -7,47 +7,50 @@
 <main>
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add product</span></h1>
     <hr class="hr-3 w-25 bg-white"/>
-    <form class="mx-auto w-25 bg-blur rounded" method="" action="/">
+    <form class="mx-auto w-25 bg-blur rounded" th:method="post" th:action="@{/product-add}"
+          th:object="${userProductBindingModel}">
         <div class="form-group">
             <div class="label-holder textCol d-flex justify-content-center">
                 <label for="name" class="h4 mb-2 text-white">Name</label>
             </div>
-            <input type="text" class="form-control" id="name" name="name"/>
-            <small class="text-danger"> Name error</small>
+            <input th:field="*{name}" th:errorclass="is-invalid" type="text" class="form-control" id="name"
+                   name="name"/>
+            <small class="invalid-feedback text-danger"> Name length must be between 3 and 20 characters!</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="description" class="h4 mb-2">Description</label>
             </div>
-            <textarea type="text" class="form-control" id="description" name="description"></textarea>
-            <small class="text-danger">Description error message</small>
+            <textarea th:field="*{description}" th:errorclass="is-invalid" type="text" class="form-control"
+                      id="description" name="description"></textarea>
+            <small class="invalid-feedback text-danger">Description min length must be minimum 5!</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="neededBefore" class="h4 mb-2">Before</label>
             </div>
-            <input type="datetime-local" class="form-control" id="neededBefore" name="neededBefore"/>
-            <small class="text-danger">Needed before date error</small>
+            <input th:field="*{neededBefore}" th:errorclass="is-invalid" type="datetime-local" class="form-control"
+                   id="neededBefore" name="neededBefore"/>
+            <small class="invalid-feedback text-danger">The date cannot be in the past!</small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white textCol d-flex justify-content-center">
                 <label for="price" class="h4 mb-2">Price</label>
             </div>
-            <input type="number" step="0.1" class="form-control" id="price" name="price"/>
-            <small class="text-danger">Price error message</small>
+            <input th:field="*{price}" th:errorclass="is-invalid" type="number" step="0.1" class="form-control"
+                   id="price" name="price"/>
+            <small class="invalid-feedback text-danger">The price must be a positive number!</small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="category" class="h4 mb-2">Category</label>
             </div>
-            <select class="browser-default custom-select" id="category" name="category">
+            <select th:field="*{category}" th:errorclass="is-invalid" class="browser-default custom-select" id="category" name="category">
                 <option value="">Select category</option>
-				<option value="FOOD">Food</option>
-                <option value="DRINK">Drink</option>
-                <option value="HOUSEHOLD">Household</option>
-                <option value="OTHER">Other</option>  				
+                <option th:each="c : ${T(bg.softuni.shopinglist.model.entity.CategoryNameEnum).values()}"
+                        th:value="${c}" th:text="${c}"></option>
             </select>
-            <small class="text-danger">Category error message</small>
+            <small class="invalid-feedback text-danger">Category error message</small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">
