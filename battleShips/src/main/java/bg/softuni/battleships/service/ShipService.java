@@ -63,16 +63,18 @@ public class ShipService {
         Optional<ShipEntity> attacker = shipRepository.findById(homeBindingModel.getAttackerShip());
         Optional<ShipEntity> defender = shipRepository.findById(homeBindingModel.getDefenderShip());
 
-        UserShipView userShipAttacker = modelMapper.map(attacker, UserShipView.class);
-        UserShipView otherUsersShipsDefenders = modelMapper.map(defender, UserShipView.class);
 
-        long defenderHp = otherUsersShipsDefenders.getHealth() - userShipAttacker.getPower();
+        ShipEntity attackerShip = attacker.orElseThrow();
+        ShipEntity defenderShip = defender.orElseThrow();
 
-        if (defenderHp <= 0) {
+        long defenderHpAfterAttack = defenderShip.getHealth() - attackerShip.getPower();
+
+        if (defenderHpAfterAttack <= 0) {
             shipRepository.deleteById(homeBindingModel.getDefenderShip());
         } else {
-            otherUsersShipsDefenders.setHealth(defenderHp);
-            modelMapper.map(otherUsersShipsDefenders, ShipEntity.class);
+
+            defenderShip.setHealth(defenderHpAfterAttack);
+            shipRepository.save(defenderShip);
         }
 
     }
