@@ -3,6 +3,7 @@ package bg.softuni.musicdb.service;
 import bg.softuni.musicdb.model.entity.ArtistEntity;
 import bg.softuni.musicdb.model.entity.ArtistNameEnum;
 import bg.softuni.musicdb.repository.ArtistRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -11,9 +12,11 @@ import java.util.Arrays;
 public class ArtistService {
 
     private final ArtistRepository artistRepository;
+    private final ModelMapper modelMapper;
 
-    public ArtistService(ArtistRepository artistRepository) {
+    public ArtistService(ArtistRepository artistRepository, ModelMapper modelMapper) {
         this.artistRepository = artistRepository;
+        this.modelMapper = modelMapper;
     }
 
     public void addArtistInfo() {
@@ -61,5 +64,11 @@ public class ArtistService {
                             artistRepository.save(artist);
                         }
                 );
+    }
+
+    public ArtistEntity findArtist(ArtistNameEnum artist) {
+        return artistRepository.findByName(artist)
+                .map(a -> modelMapper.map(a, ArtistEntity.class))
+                .orElse(null);
     }
 }
