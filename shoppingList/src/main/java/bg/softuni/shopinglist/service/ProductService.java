@@ -1,10 +1,16 @@
 package bg.softuni.shopinglist.service;
 
+import bg.softuni.shopinglist.model.entity.CategoryNameEnum;
 import bg.softuni.shopinglist.model.entity.ProductEntity;
 import bg.softuni.shopinglist.model.service.ProductServiceModel;
+import bg.softuni.shopinglist.model.view.ProductViewModel;
 import bg.softuni.shopinglist.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -25,5 +31,23 @@ public class ProductService {
         product.setCategory(categoryService.findByCategoryName(productServiceModel.getCategory()));
 
         productRepository.save(product);
+    }
+
+    public List<ProductViewModel> findByProductCategoryName(CategoryNameEnum food) {
+        return productRepository.findByCategoryName(food)
+                .stream().map(f -> modelMapper.map(f, ProductViewModel.class))
+                .collect(Collectors.toList());
+    }
+
+    public void buyProduct(Long id) {
+        productRepository.deleteById(id);
+    }
+
+    public BigDecimal totalSum() {
+        return productRepository.findMyProductsSum();
+    }
+
+    public void buyAllProduct() {
+            productRepository.deleteAll();
     }
 }
