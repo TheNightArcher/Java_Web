@@ -40,6 +40,7 @@ public class AlbumService {
         return albumRepository.findAlbumsCopies();
     }
 
+
     public List<HomeViewModel> findAllAlbums() {
         return albumRepository.findAll()
                 .stream().map(a -> {
